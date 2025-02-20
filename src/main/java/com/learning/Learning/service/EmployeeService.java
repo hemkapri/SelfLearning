@@ -1,30 +1,36 @@
 package com.learning.Learning.service;
 
+import com.learning.Learning.entity.EmployeesE;
 import com.learning.Learning.pojo.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.learning.Learning.repo.EmployeeDataRepo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
 
-    public List<Employee> getEmpData(long id){
-        List<Employee> obj = new ArrayList<>();
-        obj.add(new Employee(1,"Hem","Pithoragarh",7534868979L));
-        obj.add(new Employee(2,"Mukesh","Pune",9599512623L));
-        obj.add(new Employee(3,"Avyaan","Delhi",7534899999L));
-        obj.add(new Employee(4,"Hridhaan","Mumbai",9534868979L));
+    @Autowired
+    private EmployeeDataRepo employeeDataRepo;
 
-        return obj;
+    public Optional<EmployeesE> getEmpData(long id){
+       Optional<EmployeesE> data = employeeDataRepo.findById(id);
+        return data;
 
     }
     public String saveEmpData(Employee e){
-        return "Save Employee Data Successfully";
+        EmployeesE obj = new EmployeesE();
+        obj.setEmpName(e.getEmpName());
+        obj.setEmpAddress(e.getEmpAddress());
+        obj.setEmpMobileNo(e.getEmpMobileNo());
+        EmployeesE entity = employeeDataRepo.save(obj);
+        return "Save Employee Data Successfully, details = "+ entity;
     }
 
     public String deleteempData(long id){
-        return "Delete Data Successfully";
+        employeeDataRepo.deleteById(id);
+        return "Delete Data Successfully" + id;
     }
 
     public String updateEmpData(Employee e){

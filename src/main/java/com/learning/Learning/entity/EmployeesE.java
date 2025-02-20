@@ -1,15 +1,23 @@
-package com.learning.Learning.pojo;
+package com.learning.Learning.entity;
 
-public class Employee implements Cloneable{
+import jakarta.persistence.*;
 
+@Entity
+@Table(name="EMPLOYEE_DATA")
+public class EmployeesE {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long empId;
+
+    @Column(name = "EMPLOYEE_NAME")
     private String empName;
+
+    @Column(name = "EMPLOYEE_ADDRESS")
     private String empAddress;
+
+    @Column(name = "EMPLOYEE_NUMBER")
     private long empMobileNo;
-
-    public Employee() {
-
-    }
 
     public long getEmpId() {
         return empId;
@@ -43,18 +51,14 @@ public class Employee implements Cloneable{
         this.empMobileNo = empMobileNo;
     }
 
+
     @Override
     public String toString() {
-        return "Employee{" +
+        return "EmployeeEntity{" +
                 "empId=" + empId +
                 ", empName='" + empName + '\'' +
                 ", empAddress='" + empAddress + '\'' +
                 ", empMobileNo=" + empMobileNo +
                 '}';
-    }
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
     }
 }

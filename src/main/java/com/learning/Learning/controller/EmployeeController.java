@@ -1,11 +1,12 @@
 package com.learning.Learning.controller;
 
+import com.learning.Learning.entity.EmployeesE;
 import com.learning.Learning.pojo.Employee;
 import com.learning.Learning.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 //@RequestMapping("/data")
@@ -16,7 +17,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/getData/{id}", method = RequestMethod.GET)
     //@GetMapping("/get")
-    public List<Employee> getEmpData(@PathVariable long id){
+    public Optional<EmployeesE> getEmpData(@PathVariable long id){
         return e.getEmpData(id);
 
     }
